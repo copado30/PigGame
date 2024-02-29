@@ -52,10 +52,12 @@ public class PigLocalGame extends LocalGame {
 
           if(gameState.getPlayerId() == 0){
               gameState.setPlayer0Score(gameState.getPlayer0Score() + gameState.getDiceAdd());
+              gameState.setDiceAdd(0);
               gameState.setPlayerId(1);
           }
           else if(gameState.getPlayerId() == 1) {
               gameState.setPlayer1Score(gameState.getPlayer1Score() + gameState.getDiceAdd());
+              gameState.setDiceAdd(0);
               gameState.setPlayerId(0);
           }
           return true;
@@ -78,11 +80,9 @@ public class PigLocalGame extends LocalGame {
             else{
                 if(gameState.getPlayerId() == 0){
                     gameState.setDiceAdd(gameState.getDiceAdd()+ gameState.getDieVal());
-                    gameState.setPlayerId(1);
                 }
                 else if(gameState.getPlayerId() == 1) {
                     gameState.setDiceAdd(gameState.getDiceAdd()+ gameState.getDieVal());
-                    gameState.setPlayerId(0);
                 }
             }//end of if dieVal > 1
             return true;
@@ -96,7 +96,6 @@ public class PigLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        //TODO  You will implement this method
         PigGameState pigGameState = new PigGameState(gameState);
         p.sendInfo(pigGameState);
     }//sendUpdatedSate
@@ -111,6 +110,12 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         //TODO  You will implement this method
+        if(gameState.getPlayer0Score() >= 50){
+            return "Player one has won with a score of: " + gameState.getPlayer0Score();//player one has won
+        }
+        else if(gameState.getPlayer1Score() >= 50){
+            return "Player two has won with a score of: " + gameState.getPlayer1Score();//player two has won
+        }
         return null;
     }
 

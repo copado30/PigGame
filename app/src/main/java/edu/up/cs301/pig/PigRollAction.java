@@ -12,4 +12,6 @@ public class PigRollAction extends GameAction {
     public PigRollAction(GamePlayer player) {
         super(player);
     }
+
+
 }
